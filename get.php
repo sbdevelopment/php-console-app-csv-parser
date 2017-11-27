@@ -1,5 +1,5 @@
 <?php
-require './php-console-app/conf.php';
+require './app/conf.php';
 $errors = new \ConsoleApp\Errors();
 if(!empty($_GET['f'])) {
     $class_name = 'ConsoleApp\Generator\\' . str_replace('.','',strtoupper(substr($_GET['f'], -4, 4)));
@@ -12,6 +12,7 @@ if(!empty($_GET['f'])) {
             header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
             header ("Cache-Control: no-cache, must-revalidate");
             echo $file;
+            unlink(HOMEDIR.'/dl/'.$_GET['f']);
         }
     } else {
         echo $errors->getMessage(2);

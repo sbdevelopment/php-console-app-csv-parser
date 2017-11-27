@@ -5,7 +5,7 @@ require HOMEDIR . '/app/autoload.php';
 Psr4AutoloadClass::init(HOMEDIR . SRC);
 header('Content-Type: application/json;charset="utf-8"');
 error_reporting(0);
-if(php_sapi_name() !== 'cli') {
+if(php_sapi_name() !== 'cli' && $_SERVER['SCRIPT_NAME'] !== '/get.php') {
     die('HERE IS NOT CLI');
 } else {
     $file = $output = '';
