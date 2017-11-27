@@ -1,4 +1,7 @@
-## php-console-app-csv-parser
+## CSV Converter (CLI-app)
+
+[![Minimum Required](https://img.shields.io/badge/php-%5E7.1-green.svg)]()
+
 Как пользоваться:
 
 ```sh
