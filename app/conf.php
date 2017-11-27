@@ -22,8 +22,8 @@ if(php_sapi_name() !== 'cli' && $_SERVER['SCRIPT_NAME'] !== '/get.php') {
             $output = str_replace('--output=', '', $item);
         } elseif (preg_match('/--sort=/', $item)) {
             $sort = str_replace('--sort=', '', $item);
-        }elseif (preg_match('/--tcp/', $item)) {
-            $tcp = true;
+        } elseif (preg_replace('/^--tcp=\'(.*)\s(.*)\'$/', '$1:$2',$item)) {
+            $tcp = preg_match('/^(\d+).(\d+).(\d+).(\d+)\:(\d+)$/i',$item) ? $item : false;
         }
     }
 }

@@ -9,7 +9,11 @@ if(!empty($file) && !empty($output)) {
         $class_name = '\ConsoleApp\Reader\TCP';
     }
     if (class_exists($class_name)) {
-        echo (new $class_name($file))->output($output);
+        if(!$tcp) {
+            echo (new $class_name($file))->output($output);
+        } else {
+            echo (new $class_name($tcp.$file))->output($output);
+        }
     } else {
         echo $errors->getMessage(2);
     }
