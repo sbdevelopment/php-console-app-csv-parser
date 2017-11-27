@@ -2,13 +2,9 @@
 
 namespace ConsoleApp;
 
-use ConsoleApp\Errors;
-
 abstract class Reader
 {
     private const TYPES = ['json','xml','yaml','sqlite','html'];
-
-    public const SITE = 'http://test1.ru';
 
     /**
      * @var array
@@ -34,12 +30,6 @@ abstract class Reader
      * @return array
      */
     abstract protected function readFile($path);
-
-    /**
-     * @param array $content
-     * @return bool|string
-     */
-    abstract protected function createLinkForContent($content,$output_type);
 
     /**
      * @param array $content
@@ -88,6 +78,24 @@ abstract class Reader
     }
 
     /**
+     * @param array $content
+     * @param string $output_type
+     * @return string|bool
+     */
+    final protected function createLinkForContent($content, $output_type)
+    {
+        $type = strtoupper(trim($output_type));
+        $class_name = 'ConsoleApp\Generator\\' . $type;
+        if (class_exists($class_name)) {
+            $generator = new $class_name();
+            if ($generator->saveContent($content)) {
+                return $generator->getSavedFileName();
+            }
+        }
+        return false;
+    }
+
+    /**
      * @param string $type
      * @return string
      */
@@ -97,7 +105,7 @@ abstract class Reader
         if (in_array($type,self::TYPES)) {
             $content = $this->getContent();
             if(count($content)) {
-                $url = self::SITE . '/get.php?f=' . $this->createLinkForContent($content, $type);
+                $url = SITE . '/get.php?f=' . $this->createLinkForContent($content, $type);
                 return json_encode([
                     'success' => true,
                     'url' => $url

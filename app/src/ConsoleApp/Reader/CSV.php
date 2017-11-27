@@ -30,22 +30,4 @@ class CSV extends Reader
         }
         return false;
     }
-
-    /**
-     * @param array $content
-     * @param string $output_type ! добавить в use все доступные классы
-     * @return string|bool
-     */
-    protected function createLinkForContent($content, $output_type)
-    {
-        $type = strtoupper(trim($output_type));
-        $class_name = 'ConsoleApp\Generator\\' . $type;
-        if (class_exists($class_name)) {
-            $generator = new $class_name();
-            if ($generator->saveContent($content)) {
-                return $generator->getSavedFileName();
-            }
-        }
-        return false;
-    }
 }
