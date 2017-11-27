@@ -1,5 +1,5 @@
 <?php
-require './php-console-app/conf.php';
+require './app/conf.php';
 $errors = new \ConsoleApp\Errors();
 if(!empty($_REQUEST['file']) && !empty($_REQUEST['output'])) {
 
