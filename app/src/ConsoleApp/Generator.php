@@ -9,6 +9,10 @@ abstract class Generator
      */
     private $file_name;
 
+    /**
+     * @param array $array
+     * @return string
+     */
     abstract protected function generateFromArray($array);
 
     /**
