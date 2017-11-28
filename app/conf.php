@@ -21,9 +21,6 @@ else {
             $sort = str_replace('--sort=', '', $item);
         } elseif (preg_replace('/^--tcp=\'(.*)\s(.*)\'$/', '$1:$2',$item)) {
             $tcp = preg_match('/^([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})\:([0-9]{2,5})$/i',$item) ? $item : false;
-            if(!$tcp) {
-                $tcp = preg_match('/^([a-z\-]+)\.([a-z]{2,6})\:([0-9]{2,5})$/i',$item) ? $item : false;
-            }
         }
     }
 }
