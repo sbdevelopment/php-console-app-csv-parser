@@ -8,17 +8,22 @@ class TCPTest extends TestCase
 {
     private $tcp;
     private $path;
-    private $output;
-    private $pattern;
 
     protected function setUp()
     {
-        $tcp = '167.0.0.1:80'; // ip:port
-        $file = '/path/to/file.csv'; // /path/to/file.csv
+        $tcp = 'sbdevelopment.com:80'; // host:port or ip:port
+        $file = '/test.csv'; // /path/to/file.csv
         $this->path = $tcp . $file;
-        $this->output = 'json'; // json, xml, html
         $this->tcp = new TCP($this->path);
-        $this->pattern = '/^\{\"success\"\:true\,\"url\"\:\"http(s?)([\:\\/\\/]+)(.*)([\\/]+)get.php\?f\=([0-9\-\.a-z]+)\"\}$/i';
+    }
+
+    /**
+     * Тест fsockopen()
+     */
+    public function testOpenSocket()
+    {
+        $open = $this->tcp->openSocket($this->path);
+        self::assertTrue($open);
     }
 
     /**
@@ -30,6 +35,9 @@ class TCPTest extends TestCase
     {
         $count = 3; // Ожидаемое кол-во элементов массива
         $array = $this->tcp->readFile($this->path);
+        if(!$array) {
+            $array = [];
+        }
         self::assertCount($count, $array);
     }
 

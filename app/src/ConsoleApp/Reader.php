@@ -27,7 +27,7 @@ abstract class Reader
 
     /**
      * @param string $path
-     * @return array
+     * @return array|bool
      */
     abstract protected function readFile($path);
 

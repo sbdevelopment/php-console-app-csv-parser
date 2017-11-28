@@ -8,15 +8,11 @@ class CSVTest extends TestCase
 {
     private $csv;
     private $path;
-    private $output;
-    private $pattern;
 
     protected function setUp()
     {
         $this->path = 'C:/APACHE_SERVER/test1.ru/test.csv'; // /path/to/file.csv
-        $this->output = 'json'; // json, xml, html
         $this->csv = new CSV($this->path);
-        $this->pattern = '/^\{\"success\"\:true\,\"url\"\:\"http(s?)([\:\\/\\/]+)(.*)([\\/]+)get.php\?f\=([0-9\-\.a-z]+)\"\}$/i';
     }
 
     /**
@@ -28,6 +24,9 @@ class CSVTest extends TestCase
     {
         $count = 3; // Ожидаемое кол-во элементов массива
         $array = $this->csv->readFile($this->path);
+        if(!$array) {
+            $array = [];
+        }
         self::assertCount($count, $array);
     }
 }
