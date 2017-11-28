@@ -5,7 +5,7 @@
 [![SymfonyYaml](https://img.shields.io/badge/Symfony--Yaml-%5E3.2-green.svg)]()
 
 Экспортирует данные из CSV в формат, указанный в output.
-Данные CSV соттветсвовать параметрам 
+Данные CSV должны соответсвовать параметрам 
 
 ``Название Отеля string, URL string, рейтинг int(0-5)``
 
