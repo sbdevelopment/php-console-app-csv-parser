@@ -1,14 +1,5 @@
 <?php
-// Constants
-define('HOMEDIR','C:/APACHE_SERVER/test1.ru');
-define('SRC','/app/src/');
-define('SITE','http://test1.ru');
-
-// PSR autoloader
-require HOMEDIR . '/app/autoload.php';
-Psr4AutoloadClass::init(HOMEDIR . SRC);
-// Composer autoloader
-require HOMEDIR . '/vendor/autoload.php';
+require 'bootstrap.php';
 // Return json in console
 header('Content-Type: application/json;charset="utf-8"');
 // Errors off

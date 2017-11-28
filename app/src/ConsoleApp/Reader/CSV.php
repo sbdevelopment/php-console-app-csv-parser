@@ -14,7 +14,7 @@ class CSV extends Reader
      * @param string $path
      * @return array|bool
      */
-    protected function readFile($path)
+    public function readFile($path)
     {
         if (is_file($path) && in_array(mime_content_type($path),['text/csv','text/plain'])){
             $content = [];
