@@ -2,19 +2,14 @@
 
 namespace ConsoleApp\Reader;
 
-use ConsoleApp;
+use ConsoleApp\Reader;
 
-class TCP extends CSV
+class TCP extends Reader
 {
 
     protected function readFile($tcp)
     {
-        $regular = '/^(\d+).(\d+).(\d+).(\d+)\:(\d+)/i';
-
-        $ip = preg_replace($regular,'$1.$2.$3.$4',$tcp);
-        $port = preg_replace($regular,'$5',$tcp);
-
-        $handler = fsockopen($ip,$port);
+        $handler = $this->openSocket($tcp);
         if ($handler){
             $content = [];
             while(($data = fgetcsv($handler,2500,','))!==false){
@@ -28,4 +23,18 @@ class TCP extends CSV
         return false;
     }
 
+    private function openSocket($tcp)
+    {
+        $reg_ip = '([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})';
+        $reg_port = '([0-9]{2,5})';
+        $regular = '/^'.$reg_ip.'\:'.$reg_port.'/i';
+
+        $ip = preg_replace($regular,'$1.$2.$3.$4',$tcp);
+        $port = preg_replace($regular,'$5',$tcp);
+
+        if(preg_match('/^'.$reg_ip.'$/i', $ip) && preg_match('/^'.$reg_port.'$/', $reg_port)) {
+            return fsockopen($ip, $port);
+        }
+        return false;
+    }
 }
