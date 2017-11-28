@@ -4,6 +4,11 @@
 [![PHPUit](https://img.shields.io/badge/phpunit-%5E6.4--dev-green.svg)]()
 [![SymfonyYaml](https://img.shields.io/badge/Symfony--Yaml-%5E3.2-green.svg)]()
 
+Экспортирует данные из CSV в формат, указанный в output.
+Данные CSV соттветсвовать параметрам 
+
+``Название Отеля string, URL string, рейтинг int()``
+
 Как пользоваться:
 
 ```sh
