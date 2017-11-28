@@ -12,7 +12,7 @@ if(!empty($file) && !empty($output)) {
         if(!$tcp) {
             echo (new $class_name($file))->output($output);
         } else {
-            echo (new $class_name($tcp.$file))->output($output);
+            echo (new $class_name($tcp))->output($output);
         }
     } else {
         echo $errors->getMessage(2);
