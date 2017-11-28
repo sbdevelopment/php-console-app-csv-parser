@@ -11,7 +11,7 @@ class TCPTest extends TestCase
 
     protected function setUp()
     {
-        $tcp = '127.0.0.1:80'; // host:port or ip:port
+        $tcp = '127.0.0.1:80'; // ip:port
         $file = '/test.csv'; // /path/to/file.csv
         $this->path = $tcp . $file;
         $this->tcp = new TCP($this->path);
