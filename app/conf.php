@@ -19,7 +19,8 @@ else {
             $output = str_replace('--output=', '', $item);
         } elseif (preg_match('/--sort=/', $item)) {
             $sort = str_replace('--sort=', '', $item);
-        } elseif (preg_replace('/^--tcp=\'(.*)\s(.*)\'$/', '$1:$2',$item)) {
+        } elseif (preg_match('/--tcp=/', $item)) {
+            $item = preg_replace('/^--tcp=\'(.*)\s(.*)\'$/', '$1:$2',$item);
             $tcp = preg_match('/^([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3}).([0-9]{1,3})\:([0-9]{2,5})$/i',$item) ? $item : false;
         }
     }
